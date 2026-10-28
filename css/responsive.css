@@ -1,0 +1,123 @@
+/* ==========================================================================
+   PGConnect — responsive adaptations.
+   Base styles (styles.css) are the phone layout, matching the Android app.
+   Breakpoints: phones < 768, tablets 768–1023, laptops/desktops >= 1024.
+   ========================================================================== */
+
+/* ---------- phones (< 768px): behave like the app's stack screens ---------- */
+@media (max-width: 767.98px) {
+  /* Login, signup, PG detail and chat are full-screen stack screens in the app: no top bar. */
+  body[data-layout='auth'] .topbar,
+  body[data-layout='detail'] .topbar,
+  body[data-layout='chat'] .topbar,
+  body[data-layout='auth'] .site-footer { display: none; }
+
+  /* Detail: hero photo runs edge to edge from the very top. */
+  body[data-layout='detail'] .page { padding-top: 0; }
+  .gallery__stage { margin-inline: calc(-1 * var(--gutter)); }
+
+  /* Chat fills the screen under its own header. */
+  body[data-layout='chat'] .page { padding: 0; max-width: none; }
+  body[data-layout='chat'] .chat { height: 100vh; height: 100dvh; max-width: none; border: 0; border-radius: 0; }
+
+  .avatar-btn { padding: 3px; }
+  .avatar-btn__name, .avatar-btn__caret { display: none; }
+  .topbar__inner { gap: 12px; }
+  .topbar__right .btn { min-height: 36px; padding: 6px 12px; font-size: 14px; }
+  .toast-root { top: calc(8px + env(safe-area-inset-top, 0px)); }
+}
+
+/* ---------- small phones ---------- */
+@media (max-width: 380px) {
+  .bottombar .btn { min-width: 0; padding-inline: 14px; }
+  .role-card__body { padding: 10px; }
+  .price-pill { font-size: 13px; padding: 5px 10px; }
+}
+
+/* ---------- >= 640px ---------- */
+@media (min-width: 640px) {
+  .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .strip__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .field-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filter-panel__grid { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+/* ---------- >= 768px: tablets and up ---------- */
+@media (min-width: 768px) {
+  :root { --gutter: 24px; --topbar-h: 64px; }
+
+  .page { padding-top: 32px; padding-bottom: 48px; }
+  .topnav { display: flex; }
+  .tabbar { display: none; }
+  body.has-tabbar .page { padding-bottom: 48px; }
+  body.has-tabbar .site-footer { padding-bottom: 24px; }
+  body[data-layout='detail'].has-tabbar .page,
+  body[data-layout='chat'].has-tabbar .page { padding-bottom: 48px; }
+
+  .page-title { font-size: 30px; }
+  .page-title--md { font-size: 28px; }
+
+  /* Explore hero becomes a soft panel and the chip rows wrap instead of scrolling. */
+  .hero {
+    padding: 36px 32px 28px; border-radius: 24px; background: var(--brand-tint); border: 1px solid #FFE3DC; margin-bottom: 4px;
+  }
+  .hero__title { font-size: clamp(32px, 4.2vw, 44px); }
+  .hero__sub { font-size: 16px; margin-top: -4px; }
+  .hero .chip-row { flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; }
+  .search { box-shadow: 0 4px 16px rgba(26, 28, 30, 0.06); }
+  .search__input { font-size: 16px; padding-block: 15px; }
+
+  /* Detail: photo gets rounded corners, arrows and thumbnails. */
+  body[data-layout='detail'] .page { padding-top: 24px; }
+  .gallery__stage { margin-inline: 0; aspect-ratio: 16 / 10; border-radius: var(--r-lg); }
+  .gallery__back, .gallery__heart { top: 16px; }
+  .gallery__nav { display: grid; place-items: center; }
+  .gallery__thumbs { display: flex; }
+  .detail__name { font-size: 30px; }
+
+  /* The booking sheet becomes a centred dialog. */
+  .modal-backdrop--sheet { align-items: center; padding: 16px; }
+  .modal--sheet { border-radius: 24px; max-height: calc(100dvh - 32px); }
+  .sheet { padding: 20px 24px 24px; }
+  .sheet__handle { display: none; }
+
+  .stat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .dash-actions { grid-template-columns: auto auto; justify-content: start; max-width: none; }
+  .profile .btn { max-width: 520px; }
+
+  .chat { margin-top: 0; height: calc(100vh - var(--topbar-h) - 80px); height: calc(100dvh - var(--topbar-h) - 80px); border-radius: var(--r-lg); }
+
+  .site-footer { padding-inline: var(--gutter); }
+  .site-footer__inner { grid-template-columns: 1fr auto; align-items: start; }
+  .site-footer__nav { justify-content: flex-end; max-width: 460px; }
+
+  .toast-root { top: calc(var(--topbar-h) + 12px); }
+}
+
+/* ---------- >= 1024px: laptops and desktops ---------- */
+@media (min-width: 1024px) {
+  :root { --gutter: 32px; }
+
+  .pg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .booking-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .strip__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .hero { padding: 48px 48px 36px; }
+
+  /* Detail: two columns with a sticky booking card; the phone bottom bar goes away. */
+  .detail { grid-template-columns: minmax(0, 1.5fr) minmax(340px, 1fr); gap: 40px; align-items: start; padding-bottom: 0; }
+  .detail--solo { grid-template-columns: minmax(0, 1fr); max-width: 880px; margin-inline: auto; }
+  .detail__aside { display: block; }
+  .bottombar { display: none; }
+  .detail--loading { grid-template-columns: minmax(0, 1.5fr) minmax(340px, 1fr); }
+}
+
+/* ---------- wide screens ---------- */
+@media (min-width: 1440px) {
+  :root { --content-max: 1280px; }
+}
+
+/* ---------- touch devices: no hover lift ---------- */
+@media (hover: none) {
+  .pg-card:hover { transform: none; box-shadow: none; }
+  .card-heart:hover, .star-btn:hover { transform: none; }
+}
