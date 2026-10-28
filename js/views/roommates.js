@@ -18,7 +18,6 @@
   const JOIN_NEEDS_OPTIN = "Turn on 'Show me to others' to join a group.";
 
   const who = (p) => `${p.first_name}${p.last_initial ? ` ${p.last_initial}.` : ''}`;
-  const sampleTag = (is) => (is ? html`<span class="tag tag--sample">Sample profile</span>` : '');
 
   PGC.views.roommates = async function roommates(ctx) {
     let profile = null;
@@ -95,7 +94,7 @@
       <article class="rm-match card card--pad" data-testid="rm-match-${m.profile_id}">
         <div class="score-ring" style="--p:${m.score}" data-testid="rm-score-${m.profile_id}" role="img" aria-label="${m.score} out of 100"><span>${m.score}</span></div>
         <div class="rm-match__body">
-          <h3 class="rm-match__name">${who(m)} ${sampleTag(m.is_sample)}</h3>
+          <h3 class="rm-match__name">${who(m)}</h3>
           <p class="rm-match__band" data-testid="rm-band-${m.profile_id}">${m.band}</p>
           ${m.intake && html`<p class="rm-match__intake">${m.intake}</p>`}
           ${m.why.length > 0 && html`<p class="rm-why">${m.why.map((k) => html`<span class="chip chip--static">${WHY[k] || k}</span>`)}</p>`}
@@ -105,7 +104,7 @@
     const groupCard = (g) => html`
       <article class="group card card--pad" data-testid="group-${g.group_id}">
         <div class="group__body">
-          <h3 class="group__name"><button type="button" class="linklike" data-action="group-open" data-id="${g.group_id}">${g.name}</button> ${sampleTag(g.is_sample)}</h3>
+          <h3 class="group__name"><button type="button" class="linklike" data-action="group-open" data-id="${g.group_id}">${g.name}</button></h3>
           <p class="group__for">${g.for_whom} · ${g.window_label}</p>
           <p class="group__count" data-testid="group-count-${g.group_id}">${g.member_count} of ${g.cap} joined</p>
         </div>
@@ -244,7 +243,7 @@
               <p class="muted">${g.for_whom} · ${g.window_label}</p>
               <p class="group__count">${g.member_count} of ${g.cap} joined</p>
               <ul class="drawer__list">
-                ${g.members.map((m) => html`<li><span>${who(m)} ${sampleTag(m.is_sample)}${m.is_me && html` <span class="tag">You</span>`}</span>${m.score != null && html`<strong>${m.score}% match</strong>`}</li>`)}
+                ${g.members.map((m) => html`<li><span>${who(m)}${m.is_me && html` <span class="tag">You</span>`}</span>${m.score != null && html`<strong>${m.score}% match</strong>`}</li>`)}
                 ${g.members.length === 0 && html`<li class="muted">No members yet</li>`}
               </ul>
             </div>`,

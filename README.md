@@ -158,8 +158,8 @@ SEED_SAMPLE_PGS: true,   // false = do not create sample PGs, owners, roommate p
   and an owner's edit to a sample PG survives. The five original PGs only receive the *missing* new optional fields.
 - Result: **80 PGs in 16 areas of 4 cities** (at least 5 per area), 4 sample owners that cannot log in, 24 sample
   roommate profiles, 20 batch groups, and demo PG-manager data on Sunshine Girls PG (9 tenants, rent in several states,
-  4 complaints). Sample PGs have rating 0 and no reviews, their description says "Sample listing ... demo data", and
-  roommate profiles and groups carry a "Sample" tag. The generator is deterministic (same output every run).
+  4 complaints). Sample PGs have rating 0 and no reviews, and their description says "Sample listing ... demo data".
+  The generator is deterministic (same output every run).
 - Clearing this site's data in the browser (or `PGC.localApi.reset()` in the console) wipes the database; the samples are re-created on the next load.
 
 ### Map
